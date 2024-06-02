@@ -31,3 +31,10 @@ The goal is to ensure high availability, scalability, security and performance o
 In the scope of this task, we have created an initial architectural diagram to illustrate what we plan to build, as seen on the image below. 
 
 ![Architectural Diagram](docs/architectural-diagram.png)
+
+
+### Task 2: Developing a cost estimate
+
+In the scope of this task, we have created a cost estimate using AWS Pricing Calculator that shows the cost to run the solution in the us-east-1 Region for 12 months.
+
+To view cost estimate documentation click [HERE](./docs/cost-estimate.pdf)       
