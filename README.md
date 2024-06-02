@@ -37,5 +37,4 @@ In the scope of this task, we have created an initial architectural diagram to i
 
 In the scope of this task, we have created a cost estimate using AWS Pricing Calculator that shows the cost to run the solution in the us-east-1 Region for 12 months.
 
-To view cost estimate documentation, click below: 
-[link](./cost-estimate.pdf)       
+To view cost estimate documentation click [HERE](./docs/cost-estimate.pdf)       
