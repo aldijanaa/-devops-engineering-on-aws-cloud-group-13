@@ -57,3 +57,8 @@ Afterwards, we created two EC2 instances for each availability zone inside of th
 ### Task 3: Testing the deployment
 
 During this task, we tested the deployment of the application on both EC2 instances by entering the public IPv4 addresses of our EC2 instances, and then performing various operations like viewing, adding, deleting, and modifying records to ensure everything works as expected. We found that these operations work correctly on both of these instances. 
+
+
+At this point in the project, after Phase 2, we achieved the following structure as shown on the diagram:
+
+![Phase 2 Diagram](docs/phase-two-diagram.png)
