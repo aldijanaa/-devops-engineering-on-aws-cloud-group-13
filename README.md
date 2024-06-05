@@ -38,8 +38,6 @@ In the scope of this task, we have created an initial architectural diagram to i
 In the scope of this task, we have created a cost estimate using AWS Pricing Calculator that shows the cost to run the solution in the us-east-1 Region for 12 months.
 
 To view cost estimate documentation click [HERE](./docs/cost-estimate.pdf)       
-<<<<<<< Updated upstream
-=======
 
 
 ## Phase 2: Creating a basic functional web application
@@ -60,11 +58,9 @@ Afterwards, we created a EC2 instance for the first AZ (us-east-1a).
 
 During this task, we tested the deployment of the application on the EC2 instance by entering the public IPv4 addresses of our instance, and then performing various operations like viewing, adding, deleting, and modifying records to ensure everything works as expected. We found that these operations work correctly on the instance. 
 
-
 At this point in the project, after Phase 2, we achieved the following structure as shown on the diagram:
 
 ![Phase 2 Diagram](docs/phase-two-diagram.png)
-
 
 
 ## Phase 3: Decoupling The Application Components
@@ -132,4 +128,3 @@ Upon completing the previous tasks, the final step was to test the application. 
 After _Phase 3_, following stucture was achieved as shown on diagram:
 
 ![Phase 3 Diagram](docs/phase-three-diagram.jpg)
->>>>>>> Stashed changes
