@@ -156,7 +156,7 @@ We attached a Security Group to it that defines inbound traffic, and our previou
 
 ### Task 2: Implementing Amazon EC2 Auto Scaling
 
-First we created an AMI Image (a template that will hold the software configuration to launch an instance) of our second EC2 Instance, which we will use when launching the Auto Scailing Group. Afterwards, we configured a Launch Template to use our previously created AMI Image. For instance type we chose t2.micro, and attached a Security Group to the Launch Template. 
+First we created an AMI Image (a template that will hold the software configuration to launch an instance) of our second EC2 Instance, which we will use when launching the Auto Scailing Group. Afterwards, we configured a Launch Template to use our previously created AMI Image. For instance type we chose _t2.micro_, and attached a Security Group to the Launch Template. 
 
 Final step was to implement an Auto Scaling Group, we configured it with the previously created Launch Template and our VPC. We selected private subnets from the two AZs, _us-east-1a_ and _us-east-1b_, we chose private subnets to follow the principle of least privilege, this way, instances will only have the connectivity they require to run, and they won't be exposed to the internet unnecessarily. 
 
@@ -167,7 +167,7 @@ We attached the Load Balancer from previous task to out Auto Scaling Group, and 
 Upon completing the previous tasks, the next step was to access the application and test it. By entering the DNS name into our browser, we successfully opened the application and then performed various operations to confirm it works as expected. We found that all operations worked successfully. 
 
 The running application can be seen on the image below. 
-(./docs/load-balancer.png)
+(./docs/images/load-balancer.png)
 
 Running application is available on the following link: http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/
 
