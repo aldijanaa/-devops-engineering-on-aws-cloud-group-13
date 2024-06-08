@@ -66,9 +66,6 @@ During this task, we tested the deployment of the application on the EC2 instanc
 The running EC2 Instance can be seen on the image below. 
 ![EC2 Instance](./images/first-ec2-instance.jpg)
 
-EC2 Instance is available on the following link: http://54.91.198.177/
-
-
 At this point in the project, after Phase 2, we achieved the following structure as shown on the diagram:
 
 ![Phase 2 Diagram](./diagrams/phase-two-diagram.png)
@@ -137,8 +134,6 @@ Upon completing the previous tasks, the final step was to test the application. 
 
 The running EC2 Instance can be seen on the image below. 
 ![EC2 Instance 2](./images/second-ec2-instance.png)
-
-Second EC2 Instance is available on the following link: http://3.94.212.139/
 
 After _Phase 3_, following stucture was achieved as shown on diagram:
 
