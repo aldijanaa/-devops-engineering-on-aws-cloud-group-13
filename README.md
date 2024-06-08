@@ -128,3 +128,42 @@ Upon completing the previous tasks, the final step was to test the application. 
 After _Phase 3_, following stucture was achieved as shown on diagram:
 
 ![Phase 3 Diagram](docs/phase-three-diagram.jpg)
+
+## Phase 4: Implementing high availability and scalability
+
+### Task 1: Creating an Application Load Balancer
+
+We started by creating a Target Group to define where to send traffic that comes to the Load Balancer, we specified the port to be HTTP and IP Address Type to be IPV4 Address (type of addresses that can be addressed to this target group). We configured it with our VPC, and attached both EC2 Instances to it, allowing traffic to be evenly distributed between them. 
+
+After defining our Target Group, the next step was to create an Application Load Balancer. To allow access from the internet, for scheme type we chose _"internet-facing"_. For IP address type we chose _IPV4_ (type of addresses that our subnets use). For networking, we selected public subnets from the two AZs, _us-east-1a_ and _us-east-1b_, these are the subnets that the ALB should use. 
+
+We attached a Security Group to it that defines inbound traffic, and our previously created Target Group. 
+
+### Task 2: Implementing Amazon EC2 Auto Scaling
+
+First we created an AMI Image (a template that will hold the software configuration to launch an instance) of our second EC2 Instance, which we will use when launching the Auto Scailing Group. Afterwards, we configured a Launch Template to use our previously created AMI Image. For instance type we chose t2.micro, and attached a Security Group to the Launch Template. 
+
+Final step was to implement an Auto Scaling Group, we configured it with the previously created Launch Template and our VPC. We selected private subnets from the two AZs, _us-east-1a_ and _us-east-1b_, we chose private subnets to follow the principle of least privilege, this way, instances will only have the connectivity they require to run, and they won't be exposed to the internet unnecessarily. 
+
+We attached the Load Balancer from previous task to out Auto Scaling Group, and chose to have a maximum of 6 instances, minimum of 2 and a desired capacity of 2 instances. We selected the Target tracking policy with Target value 60.
+
+### Task 3: Accessing the application
+
+Upon completing the previous tasks, the next step was to access the application and test it. By entering the DNS name into our browser, we successfully opened the application and then performed various operations to confirm it works as expected. We found that all operations worked successfully. 
+
+
+### Task 4: Accessing the application
+
+At last, we preformed a load test to validate the high availability of our application by running the following commands on AWS Cloud9: 
+
+1. Command that installs #loadtest package to perform load testing on the application: 
+```bash 
+npm install -g loadtest
+```
+
+2. Command that performs load testing on the given URL: 
+```bash 
+loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/students
+```
+
+The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. 
