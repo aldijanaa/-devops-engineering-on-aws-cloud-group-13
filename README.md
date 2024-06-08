@@ -45,18 +45,32 @@ In this phase, the goal was to develop a highly available, highly scalabe and se
 
 ### Task 1: Creating a virtual network
 
-We first set up our VPC, and following our initial architectural diagram, the VPC contains 2 Availability Zones, each having a public and a private subnet (2 public, 2 private subnets in total). To allow public access to our application, we had to set up an Internet Gateway to connect our VPC. We also created a public route table to define where the traffic should be directed, and attached our previously created Internet Gateway to it. 
+We first set up our VPC, and following our initial architectural diagram, the VPC contains 2 AZs, _us-east-1a_ and _us-east-1b_, each having a public and a private subnet (2 public, 2 private subnets in total). 
+
+To allow public access to our application, we had to set up an Internet Gateway to connect our VPC. We created a public route table to define where the traffic should be directed, attached public subnets to its Subnet Associations, and added our previously created Internet Gateway to it. 
+
+We also created a NAT Gateway and attached it to one of the public subnets. We created a private route table and added private subnets to it, as well as configuring a new route to point to this NAT Gateway.
+
+We decided to use two AZs with public and private subnets each to build a scalable and secure architecture. For example, by distributing EC2 Instances across multiple AZs, we ensure high availability. 
 
 
 ### Task 2: Creating a virtual machine
 
 We started off by defining a Security Group to enchance security of our application, and to define Inbound and Outbound Rules. 
-Afterwards, we created a EC2 instance for the first AZ (us-east-1a).  
+Afterwards, we created a EC2 instance for the first AZ (us-east-1a). We  configured EC2 Instance with _Ubuntu AMI_as specified in the task, and choose _t3.micro_ instance type, because it is a part of AWS Free Tier to ensure budget-friendliness, as cost optimization is in the focus of this project. Then, we configured it to the VPC created in the above task, specifically the public subnet of the first AZ, and enabled auto-assign public IPv4 Address, so that the instance will automatically receive a public IP Address at launch. Further, we attached the Security Group that we created previously to control the traffic of the instance.
+
+For user data, we uploaded the script from the task description, which is available [here](./helper-scripts/UserdataScript-phase-2.sh). This script will install the required web application and database on the virtual machine.
 
 
 ### Task 3: Testing the deployment
 
 During this task, we tested the deployment of the application on the EC2 instance by entering the public IPv4 addresses of our instance, and then performing various operations like viewing, adding, deleting, and modifying records to ensure everything works as expected. We found that these operations work correctly on the instance. 
+
+The running EC2 Instance can be seen on the image below. 
+(docs/first-ec2-instance.jpg)
+
+EC2 Instance is available on the following link: http://54.91.198.177/
+
 
 At this point in the project, after Phase 2, we achieved the following structure as shown on the diagram:
 
@@ -69,18 +83,17 @@ In this phase, the goal was to seperate the database and web server infrastructu
 
 ### Task 1: Changing the VPC configuration
 
-As our original architecture already included two AZs with public and private subnets each, we did not need to do any updating or reconfiguration of the VPC, therefore we skipped task 1 and immediately went to task 2.
+As our original architecture already included two AZs with public and private subnets each, we did not need to do any updating or reconfiguration of the VPC, therefore we didn't have to change anything for Task 1, so we started working on Task 2.
 
 
 ### Task 2: Creating and configurating the Amazon RDS Databse
 
-During this task we created an Amazon RDS Database that runs on MySQL Engine, during this we have also defined a Security Group allowing only the web application to access the database. The database is deployed on the private subnets for improved security.
+We started this task by defining a Security Group to allow inbound traffic to our RDS Database. After this, we started with creating Amazon RDS Database that runs on MySQL Engine. We configured credentials for this database. For instance type we choose _db.t3.micro_ due to its Free Tier eligibility. We attached it to our project VPC and defined a Database Subnet Group for it that contains private subnets from both VPC's AZs,  which specifies where the RDB Database should be located. The reason we choose private subnets is to maintain security as private subnets do not have direct access to Internet, and access to the database is strictly controlled through NAT Gateway. We also attached previously defined Security Group to the database.
 
 
 ### Task 3: Configuring the development environment
 
-Next step was to setup Cloud9 IDE which we have done sucessfuly, then we made sure that Cloud9 has access to both EC2 Instances and RDS Database by defining Security Groups. 
-
+Next step was to setup Cloud9 IDE which allows us to execute shell commands within the environment. We chose _t3.micro_ instance as specified in the task. For network settings, we choose Secure Shell (SSH), and attached it to our VPC in a public subnet. 
 
 ### Task 4:  Provisioning SecretsManager 
 
@@ -125,6 +138,11 @@ These commands can also be found inside the cloud9-scripts.yml file, which is av
 
 Upon completing the previous tasks, the final step was to test the application. We tested the application by performing basic operations including viewing, adding, deleting and modifying student records. We concluded that the database was successfuly migrated from the old EC2 Instance into RDS.
 
+The running EC2 Instance can be seen on the image below. 
+(./docs/second-ec2-instance.png)
+
+Second EC2 Instance is available on the following link: http://3.94.212.139/
+
 After _Phase 3_, following stucture was achieved as shown on diagram:
 
 ![Phase 3 Diagram](docs/phase-three-diagram.jpg)
@@ -151,8 +169,13 @@ We attached the Load Balancer from previous task to out Auto Scaling Group, and 
 
 Upon completing the previous tasks, the next step was to access the application and test it. By entering the DNS name into our browser, we successfully opened the application and then performed various operations to confirm it works as expected. We found that all operations worked successfully. 
 
+The running application can be seen on the image below. 
+(./docs/load-balancer.png)
 
-### Task 4: Accessing the application
+Running application is available on the following link: http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/
+
+
+### Task 4: Load testing the application
 
 At last, we preformed a load test to validate the high availability of our application by running the following commands on AWS Cloud9: 
 
@@ -163,7 +186,16 @@ npm install -g loadtest
 
 2. Command that performs load testing on the given URL: 
 ```bash 
-loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/students
+loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com
 ```
 
-The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. 
+
+Previous code can also be found inside the cloud9-scripts.yml file, which is available [here](./helper-scripts/cloud9-scripts.yml).
+
+The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. The result can be seen on the image below:
+(./docs/load-test.png)
+
+
+## Conclusion
+
+During this project, we worked on planning, building, and deploying a highly available and scalable web application for Example University on AWS. We leveraged multiple AWS Services, such as EC2, RDS, Auto Scaling, Application Load Balancer spread across multiple availability zones to achieve the goal of this project. Through testing, we ensured that the application was working as expected and executing all the neccessary operations. 
