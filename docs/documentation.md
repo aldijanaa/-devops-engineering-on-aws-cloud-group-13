@@ -140,6 +140,7 @@ After _Phase 3_, following stucture was achieved as shown on diagram:
 ![Phase 3 Diagram](./diagrams/phase-three-diagram.png)
 
 ## Phase 4: Implementing high availability and scalability
+This phase focused on enhancing the application's high availability and scalability.
 
 ### Task 1: Creating an Application Load Balancer
 
