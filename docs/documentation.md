@@ -27,7 +27,7 @@ The goal is to ensure high availability, scalability, security and performance o
 
 In the scope of this task, we have created an initial architectural diagram to illustrate what we plan to build, as seen on the image below. 
 
-![Architectural Diagram](./architectural-diagram.png)
+![Architectural Diagram](./diagrams/architectural-diagram.png)
 
 
 ### Task 2: Developing a cost estimate
@@ -64,14 +64,14 @@ For user data, we uploaded the script from the task description, which is availa
 During this task, we tested the deployment of the application on the EC2 instance by entering the public IPv4 addresses of our instance, and then performing various operations like viewing, adding, deleting, and modifying records to ensure everything works as expected. We found that these operations work correctly on the instance. 
 
 The running EC2 Instance can be seen on the image below. 
-![EC2 Instance](./first-ec2-instance.jpg)
+![EC2 Instance](./images/first-ec2-instance.jpg)
 
 EC2 Instance is available on the following link: http://54.91.198.177/
 
 
 At this point in the project, after Phase 2, we achieved the following structure as shown on the diagram:
 
-![Phase 2 Diagram](./phase-two-diagram.png)
+![Phase 2 Diagram](./diagrams/phase-two-diagram.png)
 
 
 ## Phase 3: Decoupling The Application Components
@@ -100,7 +100,7 @@ After setting up the Cloud9 environment, we had moved on to creating a secret to
 aws secretsmanager create-secret \
     --name Mydbsecret \
     --description "Database secret for web app" \
-    --secret-string "{\"user\":\"admin\",\"password\":\"group13password\",\"host\":\"group-13-db.cgfhxaeheliy.us-east-1.rds.amazonaws.com\",\"db\":\"STUDENTS\"}"
+    --secret-string "{\"user\":\"admin\",\"password\":\"...\",\"host\":\"group-13-db.cgfhxaeheliy.us-east-1.rds.amazonaws.com\",\"db\":\"STUDENTS\"}"
 ```
 
 Previous code can also be found inside the cloud9-scripts.yml file, which is available [here](../helper-scripts/cloud9-scripts.yml).
@@ -116,17 +116,17 @@ Afterwards, by modifying the Security Details of the newly created instance, we 
 After successfuly creating the EC2 instance, next step was to migrate database from _Phase 2_ into the newly created RDS. 
 We achieved this by running these two commands:
 
-1. Following command exports data from existing server
+1. Following command exports data from existing server:
 ```bash
 mysqldump -h 10.0.4.180 -u nodeapp -p --databases STUDENTS > data.sql
 ```
-10.0.4.180 is the Internal IP Address of our EC2 Instance that was created in _Phase 2_
+_10.0.4.180_ is the Internal IP Address of our EC2 Instance that was created in _Phase 2_
 
-2. Following command exports data into RDS.
+2. Following command exports data into RDS:
 ```bash
 mysql -h group-13-db.cgfhxaeheliy.us-east-1.rds.amazonaws.com -u admin -p STUDENTS < data.sql
 ```
-group-13-db.cgfhxaeheliy.us-east-1.rds.amazonaws.com is the RDS Endpoint.
+_group-13-db.cgfhxaeheliy.us-east-1.rds.amazonaws.com_ is the RDS Endpoint.
 
 These commands can also be found inside the cloud9-scripts.yml file, which is available [here](../helper-scripts/cloud9-scripts.yml).
 
@@ -136,13 +136,13 @@ These commands can also be found inside the cloud9-scripts.yml file, which is av
 Upon completing the previous tasks, the final step was to test the application. We tested the application by performing basic operations including viewing, adding, deleting and modifying student records. We concluded that the database was successfuly migrated from the old EC2 Instance into RDS.
 
 The running EC2 Instance can be seen on the image below. 
-![EC2 Instance 2](./second-ec2-instance.png)
+![EC2 Instance 2](./images/second-ec2-instance.png)
 
 Second EC2 Instance is available on the following link: http://3.94.212.139/
 
 After _Phase 3_, following stucture was achieved as shown on diagram:
 
-![Phase 3 Diagram](./phase-three-diagram.png)
+![Phase 3 Diagram](./diagrams/phase-three-diagram.png)
 
 ## Phase 4: Implementing high availability and scalability
 
@@ -192,7 +192,7 @@ Previous code can also be found inside the cloud9-scripts.yml file, which is ava
 The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. The result can be seen on the image below:
 
 
-![Load Test](./load-test.png)
+![Load Test](./images/load-test.png)
 
 
 ## Conclusion
