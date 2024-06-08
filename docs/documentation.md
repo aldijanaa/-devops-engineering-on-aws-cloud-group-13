@@ -190,6 +190,8 @@ loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1
 Previous code can also be found inside the cloud9-scripts.yml file, which is available [here](../helper-scripts/cloud9-scripts.yml).
 
 The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. The result can be seen on the image below:
+
+
 ![Load Test](./load-test.png)
 
 
