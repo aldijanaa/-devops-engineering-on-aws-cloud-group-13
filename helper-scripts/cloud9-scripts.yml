@@ -25,7 +25,7 @@ npm install -g loadtest
 #Following command performs load testing on the given URL. replace the URL with Loadbalancer (or Public IP of EC2 instance)
 # Press ctrl +C to stop the script
 
-loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/students
+loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com
 
 
 Script -3:

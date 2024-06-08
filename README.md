@@ -169,8 +169,13 @@ We attached the Load Balancer from previous task to out Auto Scaling Group, and 
 
 Upon completing the previous tasks, the next step was to access the application and test it. By entering the DNS name into our browser, we successfully opened the application and then performed various operations to confirm it works as expected. We found that all operations worked successfully. 
 
+The running application can be seen on the image below. 
+(./docs/load-balancer.png)
 
-### Task 4: Accessing the application
+Running application is available on the following link: http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/
+
+
+### Task 4: Load testing the application
 
 At last, we preformed a load test to validate the high availability of our application by running the following commands on AWS Cloud9: 
 
@@ -181,7 +186,16 @@ npm install -g loadtest
 
 2. Command that performs load testing on the given URL: 
 ```bash 
-loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com/students
+loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1.elb.amazonaws.com
 ```
 
-The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. 
+
+Previous code can also be found inside the cloud9-scripts.yml file, which is available [here](./helper-scripts/cloud9-scripts.yml).
+
+The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. The result can be seen on the image below:
+(./docs/load-test.png)
+
+
+## Conclusion
+
+During this project, we worked on planning, building, and deploying a highly available and scalable web application for Example University on AWS. We leveraged multiple AWS Services, such as EC2, RDS, Auto Scaling, Application Load Balancer spread across multiple availability zones to achieve the goal of this project. Through testing, we ensured that the application was working as expected and executing all the neccessary operations. 
