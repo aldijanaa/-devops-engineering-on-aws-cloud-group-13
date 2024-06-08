@@ -27,14 +27,14 @@ The goal is to ensure high availability, scalability, security and performance o
 
 In the scope of this task, we have created an initial architectural diagram to illustrate what we plan to build, as seen on the image below. 
 
-![Architectural Diagram](./architectural-diagram.jpg)
+![Architectural Diagram](./architectural-diagram.png)
 
 
 ### Task 2: Developing a cost estimate
 
 In the scope of this task, we have created a cost estimate using AWS Pricing Calculator that shows the cost to run the solution in the us-east-1 Region for 12 months.
 
-To view cost estimate documentation click [HERE](./cost-estimate.pdf)       
+To view cost estimate documentation click [here](./cost-estimate.pdf)       
 
 
 ## Phase 2: Creating a basic functional web application
@@ -64,7 +64,7 @@ For user data, we uploaded the script from the task description, which is availa
 During this task, we tested the deployment of the application on the EC2 instance by entering the public IPv4 addresses of our instance, and then performing various operations like viewing, adding, deleting, and modifying records to ensure everything works as expected. We found that these operations work correctly on the instance. 
 
 The running EC2 Instance can be seen on the image below. 
-(docs/first-ec2-instance.jpg)
+![EC2 Instance](./first-ec2-instance.jpg)
 
 EC2 Instance is available on the following link: http://54.91.198.177/
 
@@ -108,7 +108,7 @@ Previous code can also be found inside the cloud9-scripts.yml file, which is ava
 
 ### Task 5: Provisioning a new instance for the web server
 
-In this task, we had created a new EC2 Instance inside the public subnet of the second AZ (us-east-1b). Upon creation, we set up the EC2 instance with user data, located in the helper-scripts folder, which is available on the following [link](../helper-scripts/UserdataScript-phase-2.sh).
+In this task, we had created a new EC2 Instance inside the public subnet of the second AZ (_us-east-1b_). Upon creation, we set up the EC2 instance with user data, located in the helper-scripts folder, which is available on the following [link](../helper-scripts/UserdataScript-phase-2.sh).
 Afterwards, by modifying the Security Details of the newly created instance, we attached the existing _LabInstanceProfile_ to it, which attaches an IAM role (_LabRole_) to the instance so that it can fetch the secret securely. 
 
 ### Task 6: Migrating the database 
@@ -136,13 +136,13 @@ These commands can also be found inside the cloud9-scripts.yml file, which is av
 Upon completing the previous tasks, the final step was to test the application. We tested the application by performing basic operations including viewing, adding, deleting and modifying student records. We concluded that the database was successfuly migrated from the old EC2 Instance into RDS.
 
 The running EC2 Instance can be seen on the image below. 
-(./docs/second-ec2-instance.png)
+![EC2 Instance 2](./second-ec2-instance.png)
 
 Second EC2 Instance is available on the following link: http://3.94.212.139/
 
 After _Phase 3_, following stucture was achieved as shown on diagram:
 
-![Phase 3 Diagram](./phase-three-diagram.jpg)
+![Phase 3 Diagram](./phase-three-diagram.png)
 
 ## Phase 4: Implementing high availability and scalability
 
@@ -190,7 +190,7 @@ loadtest --rps 1000  -c 500 -k http://group-13-load-balancer-140948308.us-east-1
 Previous code can also be found inside the cloud9-scripts.yml file, which is available [here](../helper-scripts/cloud9-scripts.yml).
 
 The load test was successfully completed, confirming that our application can handle high traffic and maintain its availability. The result can be seen on the image below:
-(./docs/load-test.png)
+![Load Test](./load-test.png)
 
 
 ## Conclusion
